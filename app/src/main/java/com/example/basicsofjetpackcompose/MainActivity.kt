@@ -3,12 +3,12 @@ package com.example.basicsofjetpackcompose
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -25,7 +25,8 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colors.background
                 ) {
                     // make reusable composables whenever possible
-                    Greeting("Android")
+                     val nameList = listOf("Rahul", "Ankit", "Nitin",)
+                    Greeting(names = nameList)
                 }
             }
         }
@@ -33,12 +34,26 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String) {
+fun Greeting(names: List<String>) {
     // Text is equivalent to text view in xml
     Surface(
         color = MaterialTheme.colors.primary
     ) {
-        Text(text = "Hello $name!", modifier = Modifier.padding(all = 16.dp))
+//        Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.SpaceBetween, horizontalAlignment = Alignment.CenterHorizontally) {
+//            for (name in names) {
+//                Text(text = "Hello $name!",)
+//            }
+//        }
+//        Row(modifier = Modifier.fillMaxSize(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
+//            for(name in names){
+//                Text(text = "Hello $name")
+//            }
+//        }
+        Box(modifier = Modifier.fillMaxSize()) {
+            for(name in names){
+                Text(text = "Hello $name")
+            }
+        }
     }
 }
 
@@ -46,6 +61,14 @@ fun Greeting(name: String) {
 @Composable
 fun DefaultPreview() {
     BasicsOfJetpackComposeTheme {
-        Greeting("Android")
+        Greeting(listOf("Rahul", "Ankit", "Nitin",))
     }
 }
+
+// Column -> Linear layout of xml (vertical orientation)
+// Row -> Linear layout of xml (horizontal orientation)
+// Box -> Frame layout of xml
+// modifier (fms) -> fills all *available space*
+// Alignment and Arrangement
+// Column -> vertical -> Arrangement: Vertical -> Alignment -> Horizontal
+// Row -> horizontal -> Arrangement: Horizontal -> Alignment -> Vertical
